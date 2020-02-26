@@ -2,8 +2,12 @@ package type;
 
 public enum CoffeeType {
     TEA("T"),
+    HOT_TEA("Th"),
+    HOT_COFFEE("Ch"),
     COFFEE("C"),
-    CHOCOLATE("H");
+    CHOCOLATE("H"),
+    HOT_CHOCOLATE("Hh"),
+    ORANGE("O");
 
     String coffee;
 
@@ -14,4 +18,5 @@ public enum CoffeeType {
     public String getCoffeeType() {
         return coffee;
     }
+
 }

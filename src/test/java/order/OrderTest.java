@@ -9,7 +9,34 @@ public class OrderTest {
 
 
     @Test
+    public void testSendOrderToDrinkMakerWhenOrderingOrangeWithSufficientPrice(){
+        //given
+        final Order order= initOrder(CoffeeType.ORANGE, 0, 0.8);
+        //when
+        final String result =order.sendOrderToDrinkMaker();
+        //Then
+        assertEquals(result,"M:Order has been sent-O::");
+    }
 
+    @Test
+    public void testSendOrderToDrinkMakerWhenOrderingOrangeWithInSufficientPrice(){
+        //given
+        final Order order= initOrder(CoffeeType.ORANGE, 0, 0.4);
+        //when
+        final String result =order.sendOrderToDrinkMaker();
+        //Then
+        assertEquals(result,"M:insufficient Money-Missing 0.2 to buy an Orange");
+    }
+    @Test
+    public void testSendOrderToDrinkMakerWhenOrderingHotDrink(){
+        //given
+        final Order order= initOrder(CoffeeType.HOT_CHOCOLATE, 2, 0.8);
+        //when
+        final String result =order.sendOrderToDrinkMaker();
+        //then
+        assertEquals(result,"M:Order has been sent-Hh:2:0");
+    }
+    @Test
     public void testSendOrderToDrinkMakerShouldFailBecauseNoCoffeeType() {
         //given
         final Order strangeOrder = initOrder(null, 2, 0.3);
@@ -30,6 +57,16 @@ public class OrderTest {
     }
 
     @Test
+    public void  testSendOrderShouldFailWhenOrderingHotCoffeeWithSugarWithInsufficientPrice() {
+        //given
+        final Order orderWithInsufficientMoney = initOrder(CoffeeType.HOT_COFFEE, 2, 0.5);
+        //when
+        final String result = orderWithInsufficientMoney.sendOrderToDrinkMaker();
+        //Then
+        assertEquals(result, "M:insufficient Money-Missing 0.1 to buy a Hot Coffee");
+    }
+
+    @Test
     public void testSendOrderShouldFailWhenOrderingTeaWithSugarWithInsufficientPrice() {
         //given
         final Order orderWithInsufficientMoney = initOrder(CoffeeType.TEA, 2, 0.2);
@@ -40,6 +77,16 @@ public class OrderTest {
     }
 
     @Test
+    public void testSendOrderShouldFailWhenOrderingHotTeaWithSugarWithInsufficientPrice() {
+        //given
+        final Order orderWithInsufficientMoney = initOrder(CoffeeType.HOT_TEA, 2, 0.2);
+        //when
+        final String result = orderWithInsufficientMoney.sendOrderToDrinkMaker();
+        //Then
+        assertEquals(result, "M:insufficient Money-Missing 0.2 to buy a Hot Tea");
+    }
+
+    @Test
     public void testSendOrderShouldFailWhenOrderingChocolateWithSugarWithInsufficientPrice() {
         //given
         final Order orderWithInsufficientMoney = initOrder(CoffeeType.CHOCOLATE, 2, 0.2);
@@ -47,6 +94,16 @@ public class OrderTest {
         final String result = orderWithInsufficientMoney.sendOrderToDrinkMaker();
         //Then
         assertEquals(result, "M:insufficient Money-Missing 0.3 to buy a Chocolate");
+    }
+
+    @Test
+    public void testSendOrderShouldFailWhenOrderingHotChocolateWithSugarWithInsufficientPrice() {
+        //given
+        final Order orderWithInsufficientMoney = initOrder(CoffeeType.HOT_CHOCOLATE, 2, 0.2);
+        //when
+        final String result = orderWithInsufficientMoney.sendOrderToDrinkMaker();
+        //Then
+        assertEquals(result, "M:insufficient Money-Missing 0.3 to buy a Hot Chocolate");
     }
 
 
