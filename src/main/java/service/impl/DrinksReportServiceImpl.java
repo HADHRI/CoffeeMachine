@@ -43,7 +43,7 @@ public class DrinksReportServiceImpl implements DrinksReportService {
     public String doReport(OrderList orderList) throws UnableToCreateReportException {
         if (orderList != null && !orderList.getCoffeeTypeOrderMap().isEmpty()) {
             try {
-              return handleNoEmptyOrderList(orderList);
+              return  handleNoEmptyOrderList(orderList);
             } catch (Exception e) {
                 throw new UnableToCreateReportException(e.toString());
             }

@@ -70,7 +70,7 @@ public class DrinksReportServiceTest {
     @Test
     public void doReportWithFilledOrderList() throws UnableToCreateReportException {
         //given
-        final Map<CoffeeType,List<Order>> filledMap=getFilledOrderList();
+        final Map<CoffeeType,List<Order>> filledMap= getFilledOrderList();
         //when
         when(orderList.getCoffeeTypeOrderMap()).thenReturn(filledMap);
         final String result=drinksReportService.doReport(orderList);
@@ -82,7 +82,7 @@ public class DrinksReportServiceTest {
 
     private ArrayList<Order>getOrderArrayList(CoffeeType coffeeType){
         ArrayList<Order>arrayList=new ArrayList<Order>();
-        Order firstOrder=new Order();
+        Order firstOrder=new Order(null,null);
         firstOrder.setCoffeeType(coffeeType);
         firstOrder.setMoney(0.8);
         arrayList.add(firstOrder);

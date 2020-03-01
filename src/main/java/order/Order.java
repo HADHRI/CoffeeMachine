@@ -2,6 +2,8 @@ package order;
 
 import exceptions.CoffeTypeNotMentionnedException;
 import exceptions.NotEnoughMoneyException;
+import service.BeverageQuantityChecker;
+import service.EmailNotifier;
 import type.CoffeeType;
 
 import java.math.BigDecimal;
@@ -19,6 +21,13 @@ public class Order {
     private static final double HOT_CHOCOLATE_PRICE=0.5;
     private static final double ORANGE_PRICE = 0.6;
     private static final int SUGGAR_LIMIT = 2;
+    private EmailNotifier emailNotifier;
+    private BeverageQuantityChecker beverageQuantityChecker;
+
+    public Order(EmailNotifier emailNotifier,BeverageQuantityChecker beverageQuantityChecker){
+        this.emailNotifier=emailNotifier;
+        this.beverageQuantityChecker=beverageQuantityChecker;
+    }
 
 
     public static double getTeaPrice() {
@@ -33,9 +42,7 @@ public class Order {
         return COFFEE_PRICE;
     }
 
-    public static double getChocolatePrice() {
-        return CHOCOLATE_PRICE;
-    }
+
 
     public static double getHotChocolatePrice() {
         return HOT_CHOCOLATE_PRICE;
@@ -53,9 +60,6 @@ public class Order {
         this.coffeeType = coffeeType;
     }
 
-    public double getMoney() {
-        return money;
-    }
 
     public int getSuggarNumber() {
         return suggarNumber;
@@ -122,6 +126,10 @@ public class Order {
     public String sendOrderToDrinkMaker()  {
         try {
             String orderToSend=this.createInstructionFromOrder();
+            if(beverageQuantityChecker.isEmpty(coffeeType)){
+                emailNotifier.notifyMissingDrink(beverageQuantityChecker);
+                return "Cannot deliver "+coffeeType.toString()+" because "+beverageQuantityChecker.getShortageReason()+" and email was sent to technician";
+            }
             System.out.println("Order To send "+orderToSend);
             resetOrder();
             return "M:Order has been sent-"+orderToSend;
