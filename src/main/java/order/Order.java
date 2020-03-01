@@ -20,8 +20,41 @@ public class Order {
     private static final double ORANGE_PRICE = 0.6;
     private static final int SUGGAR_LIMIT = 2;
 
+
+    public static double getTeaPrice() {
+        return TEA_PRICE;
+    }
+
+    public static double getHotTeaPrice() {
+        return HOT_TEA_PRICE;
+    }
+
+    public static double getCoffeePrice() {
+        return COFFEE_PRICE;
+    }
+
+    public static double getChocolatePrice() {
+        return CHOCOLATE_PRICE;
+    }
+
+    public static double getHotChocolatePrice() {
+        return HOT_CHOCOLATE_PRICE;
+    }
+
+    public static double getHotCoffeePrice() {
+        return HOT_COFFEE_PRICE;
+    }
+
+    public static double getOrangePrice() {
+        return ORANGE_PRICE;
+    }
+
     public void setCoffeeType(CoffeeType coffeeType) {
         this.coffeeType = coffeeType;
+    }
+
+    public double getMoney() {
+        return money;
     }
 
     public int getSuggarNumber() {
